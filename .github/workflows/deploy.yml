@@ -1,0 +1,75 @@
+name: Deploy Laravel App to Cloudways
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.4'
+        extensions: mbstring, xml, ctype, iconv, intl, pdo_mysql, sqlite3
+        coverage: none
+
+    - name: Install Local Composer Dependencies (for Vite & Wayfinder)
+      run: composer install --no-ansi --no-interaction --optimize-autoloader --no-progress
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+
+    - name: Install NPM Dependencies & Build Assets
+      run: |
+        npm ci
+        npm run build
+
+    - name: Setup SSH Key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.CLOUDWAYS_SSH_KEY }}
+        known_hosts: 'placeholder'
+        if_key_exists: replace
+
+    - name: Adding Known Hosts
+      run: ssh-keyscan -H ${{ secrets.CLOUDWAYS_SERVER_IP }} >> ~/.ssh/known_hosts
+
+    - name: Deploy files via RSYNC
+      run: |
+        rsync -avzO --no-perms --delete \
+          --exclude='.git*' \
+          --exclude='/node_modules' \
+          --exclude='/vendor' \
+          --exclude='/storage/framework/cache/data/*' \
+          --exclude='/storage/framework/sessions/*' \
+          --exclude='/storage/framework/views/*' \
+          --exclude='/storage/logs/*' \
+          --exclude='/storage/app/settings.json' \
+          --exclude='.env' \
+          ./ ${{ secrets.CLOUDWAYS_USERNAME }}@${{ secrets.CLOUDWAYS_SERVER_IP }}:${{ secrets.CLOUDWAYS_APP_PATH }}/
+
+    - name: Run Remote Post-Deployment Commands
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.CLOUDWAYS_SERVER_IP }}
+        username: ${{ secrets.CLOUDWAYS_USERNAME }}
+        key: ${{ secrets.CLOUDWAYS_SSH_KEY }}
+        script: |
+          cd ${{ secrets.CLOUDWAYS_APP_PATH }}
+          composer install --no-ansi --no-dev --no-interaction --optimize-autoloader --no-progress
+          php artisan optimize:clear
+          php artisan config:cache
+          php artisan route:cache
+          php artisan view:cache
+          php artisan migrate --force
