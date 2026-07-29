@@ -50,7 +50,7 @@ jobs:
         rsync -avzO --no-perms --delete \
           --exclude='.git*' \
           --exclude='/node_modules' \
-          --exclude='/vendor' \ 
+          --exclude='/vendor' \
           --exclude='/storage/framework/cache/data/*' \
           --exclude='/storage/framework/sessions/*' \
           --exclude='/storage/framework/views/*' \

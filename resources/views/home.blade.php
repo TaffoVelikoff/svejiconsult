@@ -80,7 +80,7 @@
     <x-turnstile.scripts />
 </head>
 <body class="bg-gray-50 text-slate-800">
-
+ 
     <!-- HEADER -->
     <header class="fixed top-0 w-full z-50">
         <div class="backdrop-blur-lg bg-white/90 border-b border-emerald-100">
