@@ -50,12 +50,13 @@ jobs:
         rsync -avzO --no-perms --delete \
           --exclude='.git*' \
           --exclude='/node_modules' \
-          --exclude='/vendor' \
+          --exclude='/vendor' \ 
           --exclude='/storage/framework/cache/data/*' \
           --exclude='/storage/framework/sessions/*' \
           --exclude='/storage/framework/views/*' \
           --exclude='/storage/logs/*' \
           --exclude='/storage/app/settings.json' \
+          --exclude='settings.json' \
           --exclude='.env' \
           ./ ${{ secrets.CLOUDWAYS_USERNAME }}@${{ secrets.CLOUDWAYS_SERVER_IP }}:${{ secrets.CLOUDWAYS_APP_PATH }}/
 
