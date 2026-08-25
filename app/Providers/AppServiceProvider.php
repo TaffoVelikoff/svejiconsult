@@ -27,7 +27,10 @@ class AppServiceProvider extends ServiceProvider
         $this->configureDefaults();
 
         view()->composer('*', function ($view) {
-            $view->with('settings', Valuestore::make(storage_path('app/settings.json'))->all());
+            $view->with([
+                'settings' => Valuestore::make(storage_path('app/settings.json'))->all(),
+                'hasNews' => \App\Models\News::exists(),
+            ]);
         });
     }
 

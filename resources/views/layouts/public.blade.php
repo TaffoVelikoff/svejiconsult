@@ -41,7 +41,9 @@
                     <a href="{{ route('home') }}#about" class="hover:text-emerald-700 transition">За нас</a>
                     <a href="{{ route('home') }}#services" class="hover:text-emerald-700 transition">Услуги</a>
                     <a href="{{ route('home') }}#process" class="hover:text-emerald-700 transition">Как работим</a>
-                    <a href="{{ route('public.news.index') }}" class="hover:text-emerald-700 transition {{ request()->routeIs('public.news.*') ? 'text-emerald-700 font-semibold' : '' }}">Новини</a>
+                    @if($hasNews)
+                        <a href="{{ route('public.news.index') }}" class="hover:text-emerald-700 transition {{ request()->routeIs('public.news.*') ? 'text-emerald-700 font-semibold' : '' }}">Новини</a>
+                    @endif
                     <a href="{{ route('home') }}#contact" class="hover:text-emerald-700 transition">Контакти</a>
                     <a href="{{ route('home') }}#contact" class="bg-emerald-700 text-white px-6 py-3 rounded-full hover:bg-emerald-800 transition shadow-lg">Консултация</a>
                 </nav>
@@ -62,7 +64,9 @@
                 <a href="{{ route('home') }}#about" class="block py-2.5 px-3 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition">За нас</a>
                 <a href="{{ route('home') }}#services" class="block py-2.5 px-3 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition">Услуги</a>
                 <a href="{{ route('home') }}#process" class="block py-2.5 px-3 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition">Как работим</a>
-                <a href="{{ route('public.news.index') }}" class="block py-2.5 px-3 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition {{ request()->routeIs('public.news.*') ? 'bg-emerald-50 text-emerald-700 font-semibold' : '' }}">Новини</a>
+                @if($hasNews)
+                    <a href="{{ route('public.news.index') }}" class="block py-2.5 px-3 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition {{ request()->routeIs('public.news.*') ? 'bg-emerald-50 text-emerald-700 font-semibold' : '' }}">Новини</a>
+                @endif
                 <a href="{{ route('home') }}#contact" class="block py-2.5 px-3 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition">Контакти</a>
                 <a href="{{ route('home') }}#contact" class="block text-center bg-emerald-700 text-white px-5 py-3 rounded-xl hover:bg-emerald-800 transition font-semibold shadow-md">Консултация</a>
             </div>
@@ -91,7 +95,9 @@
                         <li><a href="{{ route('home') }}#about" class="hover:text-white transition">За нас</a></li>
                         <li><a href="{{ route('home') }}#services" class="hover:text-white transition">Услуги</a></li>
                         <li><a href="{{ route('home') }}#process" class="hover:text-white transition">Как работим</a></li>
-                        <li><a href="{{ route('public.news.index') }}" class="hover:text-white transition">Новини</a></li>
+                        @if($hasNews)
+                            <li><a href="{{ route('public.news.index') }}" class="hover:text-white transition">Новини</a></li>
+                        @endif
                         <li><a href="{{ route('home') }}#contact" class="hover:text-white transition">Контакти</a></li>
                     </ul>
                 </div>
