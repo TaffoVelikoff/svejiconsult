@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Link } from '@inertiajs/vue3';
-import { Settings } from '@lucide/vue';
+import { Newspaper, Settings } from '@lucide/vue';
 import AppLogo from '@/components/AppLogo.vue';
 import NavMain from '@/components/NavMain.vue';
 import NavUser from '@/components/NavUser.vue';
@@ -14,6 +14,7 @@ import {
     SidebarMenuButton,
 } from '@/components/ui/sidebar';
 import { dashboard } from '@/routes';
+import { index as newsIndex } from '@/routes/news';
 import type { NavItem } from '@/types';
 
 const mainNavItems: NavItem[] = [
@@ -21,6 +22,11 @@ const mainNavItems: NavItem[] = [
         title: 'Настройки',
         href: dashboard(),
         icon: Settings,
+    },
+    {
+        title: 'Новини',
+        href: newsIndex(),
+        icon: Newspaper,
     },
 ];
 </script>

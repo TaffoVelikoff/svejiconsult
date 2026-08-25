@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="bg">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+@extends('layouts.public')
 
+@section('seo')
     <!-- Primary Meta Tags -->
-    <title>{{ $settings['site_title'] ?? 'Свежи Консулт ЕООД | Счетоводни услуги в Добрич' }}</title>
     <meta name="title" content="{{ $settings['site_title'] ?? 'Свежи Консулт ЕООД | Счетоводни услуги в Добрич' }}">
     <meta name="description" content="Свежи Консулт ЕООД предлага професионално счетоводно обслужване, ТРЗ, данъчни консултации, годишно приключване и регистрация на фирми в Добрич.">
     <meta name="keywords" content="счетоводни услуги Добрич, счетоводител Добрич, ТРЗ Добрич, данъчни консултации, регистрация фирма, годишно приключване Добрич">
@@ -29,16 +25,6 @@
     <meta name="twitter:title" content="{{ $settings['site_title'] ?? 'Свежи Консулт ЕООД | Счетоводни услуги в Добрич' }}">
     <meta name="twitter:description" content="Професионално счетоводно обслужване, ТРЗ и данъчни консултации в Добрич.">
     <meta name="twitter:image" content="{{ asset('ogimage.jpg') }}">
-
-    <!-- Favicons -->
-    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.svg') }}">
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
-    <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png') }}">
-
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- JSON-LD Structured Data (LocalBusiness / AccountingService) -->
     <script type="application/ld+json">
@@ -75,55 +61,9 @@
       "priceRange": "$$"
     }
     </script>
+@endsection
 
-    @vite(['resources/css/app.css'])
-    <x-turnstile.scripts />
-</head>
-<body class="bg-gray-50 text-slate-800">
- 
-    <!-- HEADER -->
-    <header class="fixed top-0 w-full z-50">
-        <div class="backdrop-blur-lg bg-white/90 border-b border-emerald-100">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
-                <!-- LOGO -->
-                <a href="#" class="flex items-center gap-2.5 sm:gap-3">
-                    <img src="/logo.png" alt="Sveji Consult Logo" class="w-10 h-10 sm:w-14 sm:h-14 object-contain">
-                    <div>
-                        <div class="font-bold text-base sm:text-xl text-emerald-900 leading-tight">{{ $settings['company_name'] }}</div>
-                        <div class="text-[11px] sm:text-xs text-gray-500 leading-tight">{{ $settings['activity'] }}</div>
-                    </div>
-                </a>
-
-                <!-- Desktop menu -->
-                <nav class="hidden md:flex items-center gap-8 font-medium">
-                    <a href="#about" class="hover:text-emerald-700 transition">За нас</a>
-                    <a href="#services" class="hover:text-emerald-700 transition">Услуги</a>
-                    <a href="#process" class="hover:text-emerald-700 transition">Как работим</a>
-                    <a href="#contact" class="hover:text-emerald-700 transition">Контакти</a>
-                    <a href="#contact" class="bg-emerald-700 text-white px-6 py-3 rounded-full hover:bg-emerald-800 transition shadow-lg">Консултация</a>
-                </nav>
-
-                <!-- Mobile menu button -->
-                <button id="mobile-menu-btn" type="button" class="md:hidden p-2 rounded-lg text-emerald-900 hover:bg-emerald-50 focus:outline-none" aria-label="Навигация">
-                    <svg id="menu-open-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                    <svg id="menu-close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                </button>
-            </div>
-
-            <!-- Mobile dropdown menu -->
-            <div id="mobile-menu" class="hidden md:hidden border-t border-emerald-100 bg-white/95 px-4 pt-3 pb-5 space-y-3 font-medium text-slate-800">
-                <a href="#about" class="block py-2.5 px-3 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition">За нас</a>
-                <a href="#services" class="block py-2.5 px-3 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition">Услуги</a>
-                <a href="#process" class="block py-2.5 px-3 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition">Как работим</a>
-                <a href="#contact" class="block py-2.5 px-3 rounded-lg hover:bg-emerald-50 hover:text-emerald-700 transition">Контакти</a>
-                <a href="#contact" class="block text-center bg-emerald-700 text-white px-5 py-3 rounded-xl hover:bg-emerald-800 transition font-semibold shadow-md">Консултация</a>
-            </div>
-        </div>
-    </header>
+@section('content')
 
     <!-- HERO SECTION -->
     <section class="relative min-h-screen flex items-center overflow-hidden hero-grid">
@@ -221,10 +161,62 @@
                         <h3 class="font-bold text-lg sm:text-xl text-emerald-900">{{ $settings['about_card_4_title'] ?? '' }}</h3>
                         <p class="mt-2 sm:mt-3 text-sm sm:text-base text-gray-600">{{ $settings['about_card_4_text'] ?? '' }}</p>
                     </div>
-                </div>
-            </div>
         </div>
     </section>
+
+    @if($latestNews)
+        <!-- LATEST NEWS SECTION -->
+        <section class="py-16 sm:py-20 bg-emerald-50/40 border-y border-emerald-100">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6">
+                <div class="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+                    <!-- Section Title & Info -->
+                    <div class="lg:col-span-4">
+                        <div class="inline-flex bg-emerald-100 text-emerald-700 px-4 py-1.5 rounded-full font-medium text-xs sm:text-sm mb-4">
+                            Последно от блога
+                        </div>
+                        <h2 class="text-3xl sm:text-4xl font-bold text-emerald-950 leading-tight">
+                            Актуални новини и съвети
+                        </h2>
+                        <p class="mt-3 text-gray-600 text-sm sm:text-base leading-relaxed">
+                            Споделяме важна информация за данъчни срокове, закони и счетоводни практики, за да Ви помогнем да управлявате бизнеса си по-лесно.
+                        </p>
+                        <div class="mt-6">
+                            <a href="{{ route('public.news.index') }}" class="inline-flex items-center text-emerald-700 hover:text-emerald-800 font-bold text-sm sm:text-base gap-1.5 cursor-pointer">
+                                Всички новини
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Latest News Card -->
+                    <div class="lg:col-span-8">
+                        <div class="bg-white rounded-2xl sm:rounded-3xl shadow-xl border border-emerald-100 p-6 sm:p-10 hover:shadow-2xl transition duration-300">
+                            <div class="flex items-center gap-3">
+                                <time class="text-xs sm:text-sm font-semibold text-emerald-700 uppercase tracking-wider">
+                                    {{ \Carbon\Carbon::parse($latestNews->created_at)->locale('bg')->translatedFormat('d F Y') }}
+                                </time>
+                                <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
+                                <span class="text-xs sm:text-sm text-gray-500">Последна публикация</span>
+                            </div>
+                            <h3 class="text-2xl sm:text-3xl font-extrabold text-emerald-950 mt-4 leading-tight">
+                                {{ $latestNews->title }}
+                            </h3>
+                            <p class="mt-4 text-gray-600 leading-relaxed text-sm sm:text-base">
+                                {{ Str::limit(strip_tags($latestNews->content), 240) }}
+                            </p>
+                            <div class="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                                <a href="{{ route('public.news.show', $latestNews->slug) }}" class="w-full sm:w-auto text-center bg-emerald-700 text-white px-6 py-3 rounded-xl font-bold hover:bg-emerald-800 transition shadow-lg cursor-pointer">
+                                    Прочети цялата статия
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    @endif
 
     <!-- WHY CHOOSE US -->
     <section class="py-16 sm:py-24 bg-emerald-950 text-white">
@@ -543,73 +535,4 @@
         <iframe class="w-full h-full border-0" loading="lazy" src="https://maps.google.com/maps?q={{ rawurlencode($mapQuery) }}&t=&z=18&ie=UTF8&iwloc=&output=embed"></iframe>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-emerald-950 text-emerald-100 py-10 sm:py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10">
-                <div>
-                    <div class="flex items-center gap-3 mb-4 sm:mb-5">
-                        <img src="/logo.png" alt="Sveji Consult Logo" class="w-10 h-10 sm:w-12 sm:h-12 object-contain">
-                        <div class="text-lg sm:text-xl font-bold text-white">{{ $settings['company_name'] }}</div>
-                    </div>
-                    <p class="text-sm sm:text-base text-emerald-200">{{ $settings['activity'] }} с професионално отношение.</p>
-                </div>
-                <div>
-                    <h3 class="font-bold text-white mb-4 sm:mb-5">Бързи връзки</h3>
-                    <ul class="space-y-2.5 sm:space-y-3 text-sm sm:text-base">
-                        <li><a href="#about" class="hover:text-white transition">За нас</a></li>
-                        <li><a href="#services" class="hover:text-white transition">Услуги</a></li>
-                        <li><a href="#process" class="hover:text-white transition">Как работим</a></li>
-                        <li><a href="#contact" class="hover:text-white transition">Контакти</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="font-bold text-white mb-4 sm:mb-5">Работно време</h3>
-                    @if(!empty($settings['working_hours']))
-                        <p class="whitespace-pre-line text-sm sm:text-base text-emerald-200 leading-relaxed">{{ $settings['working_hours'] }}</p>
-                    @endif
-                    <p class="mt-3 sm:mt-4 flex items-center gap-2 text-sm sm:text-base text-emerald-200">
-                        <span class="text-emerald-400">☎</span> {{ $settings['phone'] }}
-                    </p>
-                </div>
-            </div>
-            <div class="border-t border-emerald-800 mt-8 sm:mt-10 pt-6 text-center text-xs sm:text-sm text-emerald-300">
-                © {{ date('Y') }} {{ $settings['company_name'] }}. Всички права запазени.
-            </div>
-        </div>
-    </footer>
-
-    <!-- MOBILE CALL BUTTON -->
-    <a href="tel:{{ preg_replace('/[^0-9+]/', '', $settings['phone']) }}" class="fixed bottom-5 right-5 w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-emerald-700 text-white flex items-center justify-center text-xl sm:text-2xl shadow-2xl z-40 md:hidden hover:bg-emerald-800 transition transform active:scale-95" aria-label="Обади се">
-        ☎
-    </a>
-
-    <!-- MOBILE MENU SCRIPT -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const btn = document.getElementById('mobile-menu-btn');
-            const menu = document.getElementById('mobile-menu');
-            const openIcon = document.getElementById('menu-open-icon');
-            const closeIcon = document.getElementById('menu-close-icon');
-
-            if (btn && menu) {
-                btn.addEventListener('click', function () {
-                    menu.classList.toggle('hidden');
-                    openIcon.classList.toggle('hidden');
-                    closeIcon.classList.toggle('hidden');
-                });
-
-                menu.querySelectorAll('a').forEach(function (link) {
-                    link.addEventListener('click', function () {
-                        menu.classList.add('hidden');
-                        openIcon.classList.remove('hidden');
-                        closeIcon.classList.add('hidden');
-                    });
-                });
-            }
-        });
-    </script>
-
-</body>
-</html>
-
+@endsection

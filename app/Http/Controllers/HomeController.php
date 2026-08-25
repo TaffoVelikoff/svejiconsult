@@ -24,6 +24,7 @@ class HomeController extends Controller
     {
         return view('home', [
             'settings' => $this->valuestore->all(),
+            'latestNews' => \App\Models\News::latest()->first(),
         ]);
     }
 }

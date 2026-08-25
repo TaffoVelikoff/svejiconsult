@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Link, usePage } from '@inertiajs/vue3';
-import { Menu, Settings } from '@lucide/vue';
+import { Menu, Newspaper, Settings } from '@lucide/vue';
 import { computed } from 'vue';
 import AppLogo from '@/components/AppLogo.vue';
 import AppLogoIcon from '@/components/AppLogoIcon.vue';
@@ -36,6 +36,7 @@ import { useCurrentUrl } from '@/composables/useCurrentUrl';
 import { getInitials } from '@/composables/useInitials';
 import { toUrl } from '@/lib/utils';
 import { dashboard } from '@/routes';
+import { index as newsIndex } from '@/routes/news';
 import type { BreadcrumbItem, NavItem } from '@/types';
 
 type Props = {
@@ -58,6 +59,11 @@ const mainNavItems: NavItem[] = [
         title: 'Настройки',
         href: dashboard(),
         icon: Settings,
+    },
+    {
+        title: 'Новини',
+        href: newsIndex(),
+        icon: Newspaper,
     },
 ];
 
