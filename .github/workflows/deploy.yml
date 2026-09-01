@@ -12,7 +12,7 @@ jobs:
 
     steps:
     - name: Checkout Code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
 
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
@@ -25,7 +25,7 @@ jobs:
       run: composer install --no-ansi --no-interaction --optimize-autoloader --no-progress
 
     - name: Setup Node.js
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v7
       with:
         node-version: '20'
         cache: 'npm'
@@ -61,7 +61,7 @@ jobs:
           ./ ${{ secrets.CLOUDWAYS_USERNAME }}@${{ secrets.CLOUDWAYS_SERVER_IP }}:${{ secrets.CLOUDWAYS_APP_PATH }}/
 
     - name: Run Remote Post-Deployment Commands
-      uses: appleboy/ssh-action@v1.0.3
+      uses: appleboy/ssh-action@v1.2.5
       with:
         host: ${{ secrets.CLOUDWAYS_SERVER_IP }}
         username: ${{ secrets.CLOUDWAYS_USERNAME }}
